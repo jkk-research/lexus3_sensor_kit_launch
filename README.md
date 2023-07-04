@@ -1,1 +1,1 @@
-# sample_sensor_kit_launch
+# lexus3_sensor_kit_launch
