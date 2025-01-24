@@ -33,13 +33,14 @@ def launch_setup(context, *args, **kwargs):
         remappings=[
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
             ("output", "concatenated/pointcloud"),
+            # ros2 run topic_tools relay /concatenated/pointcloud /sensing/lidar/concatenated/pointcloud
         ],
         parameters=[
             {
                 "input_topics": [
-                    "/sensing/lidar/top/pointcloud_before_sync",
-                    "/sensing/lidar/left/pointcloud_before_sync",
-                    "/sensing/lidar/right/pointcloud_before_sync",
+                    "/os_center/points",
+                    "/os_left/points",
+                    "/os_right/points",
                 ],
                 "output_frame": LaunchConfiguration("base_frame"),
                 "input_twist_topic_type": "twist",
@@ -66,9 +67,9 @@ def generate_launch_description():
         launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value))
 
     add_launch_arg("base_frame", "base_link")
-    add_launch_arg("use_multithread", "False")
-    add_launch_arg("use_intra_process", "False")
-    add_launch_arg("pointcloud_container_name", "pointcloud_container")
+    add_launch_arg("use_multithread", "True")
+    add_launch_arg("use_intra_process", "True")
+    add_launch_arg("pointcloud_container_name", "os_container")
 
     set_container_executable = SetLaunchConfiguration(
         "container_executable",
