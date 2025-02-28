@@ -69,8 +69,8 @@ def generate_launch_description():
     lexus3_sensor_kit_launch_share_dir = get_package_share_directory("lexus3_sensor_kit_launch")
 
     add_launch_arg("base_frame", "base_link")
-    add_launch_arg("use_multithread", "False")
-    add_launch_arg("use_intra_process", "False")
+    add_launch_arg("use_multithread", "True")
+    add_launch_arg("use_intra_process", "True")
     add_launch_arg("pointcloud_container_name", "pointcloud_container")
     add_launch_arg(
         "concatenate_and_time_sync_node_param_path",
