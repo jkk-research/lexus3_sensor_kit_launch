@@ -1,0 +1,116 @@
+os_center/os_driver:
+  ros__parameters:
+    sensor_hostname: '192.168.10.20' # 'os-992219000350.local'
+    udp_dest: '192.168.10.5'
+    mtp_dest: ''
+    mtp_main: false
+    lidar_mode: '1024x10'
+    timestamp_mode: 'TIME_FROM_ROS_TIME'
+    udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
+    metadata: ''
+    lidar_port: 7505
+    imu_port: 7504
+    lidar_frame: 'os_center_a' # important for tf
+    use_system_default_qos: false # better stay false, but DLIO works only with true
+    proc_mask: IMU|PCL
+    pub_static_tf: false
+os_center/os_cloud:
+  ros__parameters:
+    timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode
+    sensor_frame: 'os_center'
+    lidar_frame: 'os_center_a' # important for tf
+    point_type: 'xyzirc'
+    # point_type[optional]: choose from: {original, native, xyz, xyzi, xyzir}
+    # Here is a breif description of each option:
+    #  - original: This uses the original point representation ouster_ros::Point
+    #          of the ouster-ros driver.
+    #  - native: directly maps all fields as published by the sensor to an
+    #          equivalent point cloud representation with the additon of ring
+    #          and timestamp fields.
+    #  - xyz: the simplest point type, only has {x, y, z}
+    #  - xyzi: same as xyz point type but adds intensity (signal) field. this
+    #          type is not compatible with the low data profile.
+    #  - xyzir: same as xyzi type but adds ring (channel) field.
+    #          this type is same as Velodyne point cloud type
+    #          this type is not compatible with the low data profile.
+    # - xyzirc: autoware specific point type, note that r is return_type and c is channel here
+    # for more details about the fields of each point type and their data refer
+    # to the following header files:
+    # - ouster_ros/os_point.h
+    # - ouster_ros/sensor_point_types.h
+    # - ouster_ros/common_point_types.h.
+os_right/os_driver:
+  ros__parameters:
+    sensor_hostname: '192.168.10.21' # 'os-122231000907.local'
+    udp_dest: '192.168.10.5'
+    mtp_dest: ''
+    mtp_main: false
+    lidar_mode: '1024x10'
+    timestamp_mode: 'TIME_FROM_ROS_TIME'
+    udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
+    metadata: ''
+    lidar_port: 7503
+    imu_port: 7502
+    lidar_frame: 'os_right_a' # important for tf
+    use_system_default_qos: false    
+    proc_mask: IMU|PCL
+    pub_static_tf: false
+os_right/os_cloud:
+  ros__parameters:
+    timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode
+    sensor_frame: 'os_right'
+    lidar_frame: 'os_right_a' # important for tf
+    point_type: 'xyzirc'
+os_left/os_driver:
+  ros__parameters:
+    sensor_hostname: '192.168.10.22' # 'os-122227001628.local'
+    udp_dest: '192.168.10.5'
+    mtp_dest: ''
+    mtp_main: false
+    lidar_mode: '1024x10'
+    timestamp_mode: 'TIME_FROM_ROS_TIME'
+    udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
+    metadata: ''
+    lidar_port: 7507
+    imu_port: 7506
+    lidar_frame: 'os_left_a' # important for tf
+    use_system_default_qos: false
+    proc_mask: IMU|PCL
+    pub_static_tf: false
+os_left/os_cloud:
+  ros__parameters:
+    timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode   
+    sensor_frame: 'os_left'
+    lidar_frame: 'os_left_a' # important for tf
+    point_type: 'xyzirc'
+os_pcl_merger_node:
+  ros__parameters:
+    topics: ["/os_left/points","/os_right/points", "/os_center/points"]
+    frames: ["os_left_a", "os_right_a", "os_center_a"]
+    child_frames: ["null", "null"]
+    target_frame: "os_center_a"
+    pub_topic_name: "sensing/temporary" # temporary topic TODO: use concatenated instead
+    merger_freq: 10.0
+    # ------------------------------
+    # CropBox Filter Parameters
+    # ------------------------------
+    # Lexus RX450h dimensions:
+    # Length: ~4.7 meters (4700 mm)
+    # Width: ~1.9 meters (1900 mm)
+    # Height: ~1.7 meters (1700 mm)
+
+    # assuming right-handed coordinate system (X: forward, Y: left, Z: up)
+    crop_box:
+      # minimum boundaries of the CropBox (meters)
+      min_x: -1.50    # Points with X < "val" will be excluded. (half of the vehicle's length backward)
+      min_y: -0.95    # Points with Y < "val" will be excluded. (half of the vehicle's width to the right)
+      min_z: -2.43    # Points with Z < "val" will be excluded. (slightly below the ground to account for any mounting height)
+      
+      # maximum boundaries of the CropBox (meters)
+      max_x: 3.50     # Points with X > "val" will be excluded. (half of the vehicle's length forward)
+      max_y: 0.95     # Points with Y > "val" will be excluded. (half of the vehicle's width to the left)
+      max_z: 0.20     # Points with Z > "val" will be excluded. (slightly above the vehicle to account for the roof and mounting height)
+      
+      negative: true  # Set to true to invert the CropBox filter, filtering points inside the defined box.
+      
+      apply: true     # Set to true to apply the filter (on / off switch)
