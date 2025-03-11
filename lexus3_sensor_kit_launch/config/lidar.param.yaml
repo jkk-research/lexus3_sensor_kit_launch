@@ -10,15 +10,15 @@ os_center/os_driver:
     metadata: ''
     lidar_port: 7505
     imu_port: 7504
-    lidar_frame: 'os_center_a' # important for tf
+    lidar_frame: 'os_center_a' 
     use_system_default_qos: false # better stay false, but DLIO works only with true
     proc_mask: IMU|PCL
     pub_static_tf: false
 os_center/os_cloud:
   ros__parameters:
     timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode
-    sensor_frame: 'os_center'
-    lidar_frame: 'os_center_a' # important for tf
+    sensor_frame: 'os_center_a_base_link'
+    lidar_frame: 'os_center_a' 
     point_type: 'xyzirc'
     # point_type[optional]: choose from: {original, native, xyz, xyzi, xyzir}
     # Here is a breif description of each option:
@@ -51,15 +51,15 @@ os_right/os_driver:
     metadata: ''
     lidar_port: 7503
     imu_port: 7502
-    lidar_frame: 'os_right_a' # important for tf
+    lidar_frame: 'os_right_a' 
     use_system_default_qos: false    
     proc_mask: IMU|PCL
     pub_static_tf: false
 os_right/os_cloud:
   ros__parameters:
     timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode
-    sensor_frame: 'os_right'
-    lidar_frame: 'os_right_a' # important for tf
+    sensor_frame: 'os_right_a_base_link'
+    lidar_frame: 'os_right_a' 
     point_type: 'xyzirc'
 os_left/os_driver:
   ros__parameters:
@@ -73,15 +73,15 @@ os_left/os_driver:
     metadata: ''
     lidar_port: 7507
     imu_port: 7506
-    lidar_frame: 'os_left_a' # important for tf
+    lidar_frame: 'os_left_a' 
     use_system_default_qos: false
     proc_mask: IMU|PCL
     pub_static_tf: false
 os_left/os_cloud:
   ros__parameters:
     timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode   
-    sensor_frame: 'os_left'
-    lidar_frame: 'os_left_a' # important for tf
+    sensor_frame: 'os_left_a_base_link'
+    lidar_frame: 'os_left_a' 
     point_type: 'xyzirc'
 os_pcl_merger_node:
   ros__parameters:
