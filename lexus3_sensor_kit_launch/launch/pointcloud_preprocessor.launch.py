@@ -43,7 +43,7 @@ def launch_setup(context, *args, **kwargs):
         name="concatenate_data",
         remappings=[
             ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
-            ("output", "concatenated/pointcloud"),
+            ("output", "sensing/lidar/concatenated/pointcloud"),
             # ros2 run topic_tools relay /concatenated/pointcloud /sensing/lidar/concatenated/pointcloud
         ],
         parameters=[concatenate_and_time_sync_node_param],

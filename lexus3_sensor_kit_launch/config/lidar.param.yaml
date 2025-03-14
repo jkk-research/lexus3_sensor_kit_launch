@@ -12,7 +12,7 @@ os_center/os_driver:
     imu_port: 7504
     lidar_frame: 'os_center_a' 
     use_system_default_qos: false # better stay false, but DLIO works only with true
-    proc_mask: IMU|PCL
+    # proc_mask: IMU|PCL
     pub_static_tf: false
 os_center/os_cloud:
   ros__parameters:
@@ -53,7 +53,7 @@ os_right/os_driver:
     imu_port: 7502
     lidar_frame: 'os_right_a' 
     use_system_default_qos: false    
-    proc_mask: IMU|PCL
+    # proc_mask: IMU|PCL
     pub_static_tf: false
 os_right/os_cloud:
   ros__parameters:
@@ -75,7 +75,7 @@ os_left/os_driver:
     imu_port: 7506
     lidar_frame: 'os_left_a' 
     use_system_default_qos: false
-    proc_mask: IMU|PCL
+    # proc_mask: IMU|PCL
     pub_static_tf: false
 os_left/os_cloud:
   ros__parameters:
