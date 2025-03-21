@@ -1,7 +1,7 @@
 <launch>
   <arg name="launch_driver" default="true"/>
-
-  <group>
+  <!--TODO: del maybe? -->
+  <!-- <group>
     <push-ros-namespace namespace="imu"/>
 
     <group>
@@ -26,5 +26,5 @@
       <arg name="input_odom" value="/localization/kinematic_state"/>
       <arg name="imu_corrector_param_file" value="$(var imu_corrector_param_file)"/>
     </include>
-  </group>
+  </group> -->
 </launch>
