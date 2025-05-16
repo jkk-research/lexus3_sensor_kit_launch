@@ -112,9 +112,9 @@ def generate_launch_description():
         package='rclcpp_components',
         executable='component_container_mt',
         composable_node_descriptions=[
-            os_left_sensor,
+            # os_left_sensor,
             os_right_sensor,
-            os_left_cloud,
+            # os_left_cloud,
             os_right_cloud,
             os_center_sensor,
             os_center_cloud,
@@ -131,8 +131,8 @@ def generate_launch_description():
             shell=True
         )
 
-    sensor_left_configure_cmd = invoke_lifecycle_cmd('os_left/os_driver', 'configure')
-    sensor_left_activate_cmd = invoke_lifecycle_cmd('os_left/os_driver', 'activate')
+    # sensor_left_configure_cmd = invoke_lifecycle_cmd('os_left/os_driver', 'configure')
+    # sensor_left_activate_cmd = invoke_lifecycle_cmd('os_left/os_driver', 'activate')
     sensor_right_configure_cmd = invoke_lifecycle_cmd('os_right/os_driver', 'configure')
     sensor_right_activate_cmd = invoke_lifecycle_cmd('os_right/os_driver', 'activate')
     sensor_center_configure_cmd = invoke_lifecycle_cmd('os_center/os_driver', 'configure')
@@ -143,8 +143,8 @@ def generate_launch_description():
         params_file_arg,
         merger_params_file_arg,
         os_container,
-        TimerAction(period=4.0, actions=[sensor_left_configure_cmd]),
-        TimerAction(period=8.0, actions=[sensor_left_activate_cmd]),
+        # TimerAction(period=4.0, actions=[sensor_left_configure_cmd]),
+        # TimerAction(period=8.0, actions=[sensor_left_activate_cmd]),
         TimerAction(period=12.0, actions=[sensor_right_configure_cmd]),
         TimerAction(period=16.0, actions=[sensor_right_activate_cmd]),
         TimerAction(period=20.0, actions=[sensor_center_configure_cmd]),

@@ -10,7 +10,6 @@ os_center/os_driver:
     metadata: ''
     lidar_port: 7505
     imu_port: 7504
-    lidar_frame: 'os_center_a' 
     use_system_default_qos: false # better stay false, but DLIO works only with true
     # proc_mask: IMU|PCL
     pub_static_tf: false
@@ -19,6 +18,7 @@ os_center/os_cloud:
     timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode
     sensor_frame: 'os_center_a_base_link'
     lidar_frame: 'os_center_a' 
+    imu_frame: 'os_center_a_imu'
     point_type: 'xyzirc'
     # point_type[optional]: choose from: {original, native, xyz, xyzi, xyzir}
     # Here is a breif description of each option:
@@ -39,6 +39,7 @@ os_center/os_cloud:
     # - ouster_ros/os_point.h
     # - ouster_ros/sensor_point_types.h
     # - ouster_ros/common_point_types.h.
+    pub_static_tf: false
 os_right/os_driver:
   ros__parameters:
     sensor_hostname: '192.168.10.21' # 'os-122231000907.local'
@@ -49,9 +50,8 @@ os_right/os_driver:
     timestamp_mode: 'TIME_FROM_ROS_TIME'
     udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
     metadata: ''
-    lidar_port: 7503
-    imu_port: 7502
-    lidar_frame: 'os_right_a' 
+    lidar_port: 7508
+    imu_port: 7509
     use_system_default_qos: false    
     # proc_mask: IMU|PCL
     pub_static_tf: false
@@ -60,7 +60,9 @@ os_right/os_cloud:
     timestamp_mode: 'TIME_FROM_ROS_TIME'  # this value needs to match os_sensor/timestamp_mode
     sensor_frame: 'os_right_a_base_link'
     lidar_frame: 'os_right_a' 
+    imu_frame: 'os_right_a_imu'
     point_type: 'xyzirc'
+    pub_static_tf: false
 os_left/os_driver:
   ros__parameters:
     sensor_hostname: '192.168.10.22' # 'os-122227001628.local'
@@ -73,7 +75,6 @@ os_left/os_driver:
     metadata: ''
     lidar_port: 7507
     imu_port: 7506
-    lidar_frame: 'os_left_a' 
     use_system_default_qos: false
     # proc_mask: IMU|PCL
     pub_static_tf: false
@@ -83,34 +84,4 @@ os_left/os_cloud:
     sensor_frame: 'os_left_a_base_link'
     lidar_frame: 'os_left_a' 
     point_type: 'xyzirc'
-os_pcl_merger_node:
-  ros__parameters:
-    topics: ["/os_left/points","/os_right/points", "/os_center/points"]
-    frames: ["os_left_a", "os_right_a", "os_center_a"]
-    child_frames: ["null", "null"]
-    target_frame: "os_center_a"
-    pub_topic_name: "sensing/temporary" # temporary topic TODO: use concatenated instead
-    merger_freq: 10.0
-    # ------------------------------
-    # CropBox Filter Parameters
-    # ------------------------------
-    # Lexus RX450h dimensions:
-    # Length: ~4.7 meters (4700 mm)
-    # Width: ~1.9 meters (1900 mm)
-    # Height: ~1.7 meters (1700 mm)
-
-    # assuming right-handed coordinate system (X: forward, Y: left, Z: up)
-    crop_box:
-      # minimum boundaries of the CropBox (meters)
-      min_x: -1.50    # Points with X < "val" will be excluded. (half of the vehicle's length backward)
-      min_y: -0.95    # Points with Y < "val" will be excluded. (half of the vehicle's width to the right)
-      min_z: -2.43    # Points with Z < "val" will be excluded. (slightly below the ground to account for any mounting height)
-      
-      # maximum boundaries of the CropBox (meters)
-      max_x: 3.50     # Points with X > "val" will be excluded. (half of the vehicle's length forward)
-      max_y: 0.95     # Points with Y > "val" will be excluded. (half of the vehicle's width to the left)
-      max_z: 0.20     # Points with Z > "val" will be excluded. (slightly above the vehicle to account for the roof and mounting height)
-      
-      negative: true  # Set to true to invert the CropBox filter, filtering points inside the defined box.
-      
-      apply: true     # Set to true to apply the filter (on / off switch)
+    pub_static_tf: false

@@ -5,7 +5,7 @@
     rosbag_length: 10.0
     maximum_queue_size: 5
     timeout_sec: 0.2
-    is_motion_compensated: true
+    is_motion_compensated: false
     publish_synchronized_pointcloud: true
     keep_input_frame_in_synchronized_pointcloud: true
     publish_previous_but_late_pointcloud: false
@@ -13,7 +13,7 @@
     input_twist_topic_type: twist
     input_topics: [
                     "/os_center/points",
-                    "/os_left/points",
+                    # "/os_left/points",
                     "/os_right/points",
                 ]
     output_frame: base_link

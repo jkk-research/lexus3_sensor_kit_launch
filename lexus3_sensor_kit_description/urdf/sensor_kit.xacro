@@ -27,7 +27,7 @@
     <xacro:property name="calibration" value="${xacro.load_yaml('$(arg config_dir)/sensor_kit_calibration.yaml')}"/>
  
  
-    <xacro:VLS-128 parent="sensor_kit_base_link" name="os_center_a" topic="/points_raw" hz="10" samples="220" gpu="$(arg gpu)">
+    <xacro:VLP-16 parent="sensor_kit_base_link" name="os_center_a" topic="/points_raw1" hz="10" samples="220" gpu="$(arg gpu)">
       <origin
         xyz="${calibration['sensor_kit_base_link']['lexus3/os_center_a']['x']}
              ${calibration['sensor_kit_base_link']['lexus3/os_center_a']['y']}
@@ -36,10 +36,10 @@
              ${calibration['sensor_kit_base_link']['lexus3/os_center_a']['pitch']}
              ${calibration['sensor_kit_base_link']['lexus3/os_center_a']['yaw']}"
       />
-    </xacro:VLS-128>
+    </xacro:VLP-16>
 
 
-      <xacro:VLS-128 parent="sensor_kit_base_link" name="os_left_a" topic="/points_raw" hz="10" samples="220" gpu="$(arg gpu)">
+      <!-- <xacro:VLP-16 parent="sensor_kit_base_link" name="os_left_a" topic="/points_raw2" hz="10" samples="220" gpu="$(arg gpu)">
       <origin
         xyz="${calibration['sensor_kit_base_link']['lexus3/os_left_a']['x']}
              ${calibration['sensor_kit_base_link']['lexus3/os_left_a']['y']}
@@ -48,10 +48,10 @@
              ${calibration['sensor_kit_base_link']['lexus3/os_left_a']['pitch']}
              ${calibration['sensor_kit_base_link']['lexus3/os_left_a']['yaw']}"
       />
-    </xacro:VLS-128>
+    </xacro:VLP-16> -->
 
 
-    <xacro:VLP-16 parent="sensor_kit_base_link" name="os_right_a" topic="/points_raw" hz="10" samples="220" gpu="$(arg gpu)">
+    <xacro:VLP-16 parent="sensor_kit_base_link" name="os_right_a" topic="/points_raw3" hz="10" samples="220" gpu="$(arg gpu)">
       <origin
         xyz="${calibration['sensor_kit_base_link']['lexus3/os_right_a']['x']}
              ${calibration['sensor_kit_base_link']['lexus3/os_right_a']['y']}
@@ -64,23 +64,24 @@
 
     
 
-    <!-- camera -->
+
+    <!-- camera zed -->
    
-    <xacro:monocular_camera_macro
+    <!-- <xacro:monocular_camera_macro
       name="zed"
       parent="sensor_kit_base_link"
       namespace=""
-      x="${calibration['sensor_kit_base_link']['lexus3/_left_camera_frame']['x']}"
-      y="${calibration['sensor_kit_base_link']['lexus3/_left_camera_frame']['y']}"
-      z="${calibration['sensor_kit_base_link']['lexus3/_left_camera_frame']['z']}"
-      roll="${calibration['sensor_kit_base_link']['lexus3/_left_camera_frame']['roll']}"
-      pitch="${calibration['sensor_kit_base_link']['lexus3/_left_camera_frame']['pitch']}"
-      yaw="${calibration['sensor_kit_base_link']['lexus3/_left_camera_frame']['yaw']}"
+      x="${calibration['sensor_kit_base_link']['lexus3/zed_camera_link']['x']}"
+      y="${calibration['sensor_kit_base_link']['lexus3/zed_camera_link']['y']}"
+      z="${calibration['sensor_kit_base_link']['lexus3/zed_camera_link']['z']}"
+      roll="${calibration['sensor_kit_base_link']['lexus3/zed_camera_link']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['lexus3/zed_camera_link']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['lexus3/zed_camera_link']['yaw']}"
       fps="30"
       width="800"
       height="400"
       fov="1.3"
-    />
+    /> -->
   
 
   
