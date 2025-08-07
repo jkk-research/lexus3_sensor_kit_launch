@@ -39,7 +39,7 @@
     </xacro:VLP-16>
 
 
-      <!-- <xacro:VLP-16 parent="sensor_kit_base_link" name="os_left_a" topic="/points_raw2" hz="10" samples="220" gpu="$(arg gpu)">
+      <xacro:VLP-16 parent="sensor_kit_base_link" name="os_left_a" topic="/points_raw2" hz="10" samples="220" gpu="$(arg gpu)">
       <origin
         xyz="${calibration['sensor_kit_base_link']['lexus3/os_left_a']['x']}
              ${calibration['sensor_kit_base_link']['lexus3/os_left_a']['y']}
@@ -48,7 +48,7 @@
              ${calibration['sensor_kit_base_link']['lexus3/os_left_a']['pitch']}
              ${calibration['sensor_kit_base_link']['lexus3/os_left_a']['yaw']}"
       />
-    </xacro:VLP-16> -->
+    </xacro:VLP-16>
 
 
     <xacro:VLP-16 parent="sensor_kit_base_link" name="os_right_a" topic="/points_raw3" hz="10" samples="220" gpu="$(arg gpu)">
@@ -82,8 +82,40 @@
       height="400"
       fov="1.3"
     /> -->
-  
 
+     <!-- camera c2_left -->
+   
+    <xacro:monocular_camera_macro
+      name="c2_left"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['lexus3/c2_camera_left']['x']}"
+      y="${calibration['sensor_kit_base_link']['lexus3/c2_camera_left']['y']}"
+      z="${calibration['sensor_kit_base_link']['lexus3/c2_camera_left']['z']}"
+      roll="${calibration['sensor_kit_base_link']['lexus3/c2_camera_left']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['lexus3/c2_camera_left']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['lexus3/c2_camera_left']['yaw']}"
+      fps="10"
+      width="2880"
+      height="1860"
+      fov="1.3"
+    />
+  
+  <xacro:monocular_camera_macro
+      name="c2_right"
+      parent="sensor_kit_base_link"
+      namespace=""
+      x="${calibration['sensor_kit_base_link']['lexus3/c2_camera_right']['x']}"
+      y="${calibration['sensor_kit_base_link']['lexus3/c2_camera_right']['y']}"
+      z="${calibration['sensor_kit_base_link']['lexus3/c2_camera_right']['z']}"
+      roll="${calibration['sensor_kit_base_link']['lexus3/c2_camera_right']['roll']}"
+      pitch="${calibration['sensor_kit_base_link']['lexus3/c2_camera_right']['pitch']}"
+      yaw="${calibration['sensor_kit_base_link']['lexus3/c2_camera_right']['yaw']}"
+      fps="10"
+      width="2880"
+      height="1860"
+      fov="1.3"
+    />
   
     
   

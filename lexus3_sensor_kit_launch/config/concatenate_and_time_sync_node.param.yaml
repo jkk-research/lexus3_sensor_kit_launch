@@ -13,7 +13,7 @@
     input_twist_topic_type: twist
     input_topics: [
                     "/os_center/points",
-                    # "/os_left/points",
+                    "/os_left/points",
                     "/os_right/points",
                 ]
     output_frame: base_link

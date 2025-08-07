@@ -65,7 +65,8 @@ os_right/os_cloud:
     pub_static_tf: false
 os_left/os_driver:
   ros__parameters:
-    sensor_hostname: '192.168.10.22' # 'os-122227001628.local'
+    sensor_hostname: '192.168.10.23' # os-122225001167.local >> OS0 64 uniform
+    # sensor_hostname: '192.168.10.22' # 'os-122227001628.local' OS 32 below horizont
     udp_dest: '192.168.10.5'
     mtp_dest: ''
     mtp_main: false
@@ -73,8 +74,8 @@ os_left/os_driver:
     timestamp_mode: 'TIME_FROM_ROS_TIME'
     udp_profile_lidar: 'RNG19_RFL8_SIG16_NIR16'
     metadata: ''
-    lidar_port: 7507
-    imu_port: 7506
+    lidar_port: 7510
+    imu_port: 7511
     use_system_default_qos: false
     # proc_mask: IMU|PCL
     pub_static_tf: false
